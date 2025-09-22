@@ -17,20 +17,20 @@ Fixed the memory leak by introducing an active flag inside useEffect to check if
 Trade-off: Minimal additional logic, keeps fetchItems intact; ensures state updates don’t happen after unmount, preventing warnings and potential memory issues.
 
 ## 2. Pagination & Search
-    Updated the GET /api/items route to handle pagination fully on the backend with a search (q) parameter.
-    Added more items to the JSON data so the pagination works across multiple pages.
-    On the client side, updated the DataContext to use the pagination and search parameters.
-    Updated Items.js to include traditional pagination buttons, a search bar with debounce, and fetch items according to page and query.
-    Trade-off: Introduces slightly more complexity on the client side with state management and debounced search, but improves UX and reduces data load per request.
+Updated the GET /api/items route to handle pagination fully on the backend with a search (q) parameter.
+Added more items to the JSON data so the pagination works across multiple pages.
+On the client side, updated the DataContext to use the pagination and search parameters.
+Updated Items.js to include traditional pagination buttons, a search bar with debounce, and fetch items according to page and query.
+Trade-off: Introduces slightly more complexity on the client side with state management and debounced search, but improves UX and reduces data load per request.
 
 ## 3. Performance (Items List Virtualization)
-    Integrated react-window List component to virtualize the items list, ensuring smooth rendering even with a large number of items.
-    Trade-off: Added an extra dependency (react-window) to the project, which slightly increases bundle size and adds minor complexity, but significantly improves performance for large lists
+Integrated react-window List component to virtualize the items list, ensuring smooth rendering even with a large number of items.
+Trade-off: Added an extra dependency (react-window) to the project, which slightly increases bundle size and adds minor complexity, but significantly improves performance for large lists
 
 ## 4. UI/UX Polish & Skeleton Loading
-    Enhanced the frontend styling using Material UI components for a modern and consistent look with dark/light theming.
-    Added responsive navigation, modernized list items, pagination buttons, and a search bar.
-    Implemented skeleton loading states for the items list while data is being fetched to improve perceived performance and UX.
-    Trade-off: Introduces additional dependency (Material UI) and slightly more complex styling logic, but significantly improves usability, accessibility, and overall user experience.
+Enhanced the frontend styling using Material UI components for a modern and consistent look with dark/light theming.
+Added responsive navigation, modernized list items, pagination buttons, and a search bar.
+Implemented skeleton loading states for the items list while data is being fetched to improve perceived performance and UX.
+Trade-off: Introduces additional dependency (Material UI) and slightly more complex styling logic, but significantly improves usability, accessibility, and overall user experience.
 
 Added minimal frontend tests for all components and pages, covering loading states, user interactions, and data rendering, with fetches and context mocked as needed.
