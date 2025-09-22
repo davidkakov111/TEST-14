@@ -66,6 +66,7 @@ function Items() {
 
       {/* Items (virtualized) */}
       {loading ? <Skeleton
+        data-testid="skeleton"
         sx={{ bgcolor: 'grey.900', borderRadius: 1 }}
         variant="rectangular"
         height={250}
