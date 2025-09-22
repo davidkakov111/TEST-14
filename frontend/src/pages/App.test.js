@@ -11,6 +11,12 @@ class ResizeObserver {
 }
 global.ResizeObserver = ResizeObserver;
 
+// Mock MUI's useColorScheme
+jest.mock('@mui/material/styles', () => ({
+  ...jest.requireActual('@mui/material/styles'),
+  useColorScheme: () => ({ mode: 'light', setMode: jest.fn() }),
+}));
+
 test('renders main Items button in header', () => {
     render(
         <MemoryRouter>
