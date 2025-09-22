@@ -28,7 +28,7 @@ Trade-off: Minimal additional logic, keeps fetchItems intact; ensures state upda
     Trade-off: Added an extra dependency (react-window) to the project, which slightly increases bundle size and adds minor complexity, but significantly improves performance for large lists
 
 ## 4. UI/UX Polish & Skeleton Loading
-    Enhanced the frontend styling using Material UI components for a modern and consistent look.
+    Enhanced the frontend styling using Material UI components for a modern and consistent look with dark/light theming.
     Added responsive navigation, modernized list items, pagination buttons, and a search bar.
     Implemented skeleton loading states for the items list while data is being fetched to improve perceived performance and UX.
     Trade-off: Introduces additional dependency (Material UI) and slightly more complex styling logic, but significantly improves usability, accessibility, and overall user experience.
