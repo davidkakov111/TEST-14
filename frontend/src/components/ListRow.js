@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ListItemButton, ListItemText } from '@mui/material';
 
 // Row component for a virtualized react-window List
 function RowComponent({
@@ -6,9 +7,17 @@ function RowComponent({
   names,
   style
 }) {
+    const item = names[index];
+
     return (
         <div style={style}>
-            <Link to={'/items/' + names[index].id}>{names[index].name}</Link>
+            <ListItemButton
+                component={Link}
+                to={`/items/${item.id}`}
+                sx={{ height: '100%' }}
+            >
+                <ListItemText primary={item.name} />
+            </ListItemButton>
         </div>
     );      
 }

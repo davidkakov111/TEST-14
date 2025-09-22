@@ -1,26 +1,43 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Card, CardContent, Typography } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 
+// Display detailed information about a specific item
 function ItemDetail() {
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/items/' + id)
+    fetch(`http://localhost:3001/api/items/${id}`)
       .then(res => res.ok ? res.json() : Promise.reject(res))
       .then(setItem)
       .catch(() => navigate('/'));
   }, [id, navigate]);
 
-  if (!item) return <p>Loading...</p>;
+  // Loading skeleton
+  if (!item) return <Skeleton
+    sx={{ bgcolor: 'grey.900', borderRadius: 1, margin: '20px auto' }}
+    variant="rectangular"
+    height={130}
+    width={400}
+  />;
 
   return (
-    <div style={{padding: 16}}>
-      <h2>{item.name}</h2>
-      <p><strong>Category:</strong> {item.category}</p>
-      <p><strong>Price:</strong> ${item.price}</p>
-    </div>
+    <Card sx={{ maxWidth: 400, margin: '20px auto', boxShadow: 3 }}>
+      <CardContent>
+        <Typography variant="h5" component="div" gutterBottom>
+          {item.name}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          <strong>Category:</strong> {item.category}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          <strong>Price:</strong> ${item.price}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 

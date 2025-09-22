@@ -3,6 +3,8 @@ import { useData } from '../state/DataContext';
 import { List } from "react-window";
 import Pagination from "../components/Pagination";
 import RowComponent from "../components/ListRow";
+import { TextField, Paper, Box } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 
 // Items page
 function Items() {
@@ -49,36 +51,38 @@ function Items() {
     };
   }, [page, debouncedQuery]);
 
-  // TODO - show loading when needed
   return (
-    <div>
+    <Box sx={{ p: 2 }}>
       {/* Search input */}
-      <div style={{ marginBottom: '10px' }}>
-        <input
-          type="text"
-          placeholder="Search items..."
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          fullWidth
+          label="Search items..."
+          variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-      </div>
+      </Box>
 
       {/* Items (virtualized) */}
-      <List
-        rowComponent={RowComponent}
-        rowCount={items ? items.length : 0}
-        height={400}
-        rowHeight={50}
-        rowProps={{ names: items }}
-        width={'100%'}
-      />
-      
-      {/* Pagination buttons */}
-      <Pagination
-        page={page}
-        totalPages={totalPages}
-        onPageChange={setPage}
-      />
-    </div>
+      {loading ? <Skeleton
+        sx={{ bgcolor: 'grey.900', borderRadius: 1 }}
+        variant="rectangular"
+        height={250}
+      /> : <Paper sx={{ mb: 2, position: 'relative' }}>
+        <List
+          rowComponent={RowComponent}
+          rowCount={items ? items.length : 0}
+          height={400}
+          rowHeight={50}
+          rowProps={{ names: items }}
+          width={'100%'}
+        />
+      </Paper>}
+
+      {/* Pagination */}
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+    </Box>
   );
 }
 

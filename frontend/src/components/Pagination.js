@@ -1,6 +1,13 @@
+import { Stack, Button, Typography } from '@mui/material';
 
 // Pagination component
 function Pagination({ page, totalPages, onPageChange }) {
+    const btnSx = {
+        minWidth: 25,    
+        height: 25,       
+        fontSize: '0.7rem',
+        padding: '2px 4px' 
+    };
     
     // Generate pagination buttons array
     const getPagination = () => {
@@ -23,27 +30,40 @@ function Pagination({ page, totalPages, onPageChange }) {
     const pagination = getPagination();
 
     return (
-        <div className="pagination">
-            <button onClick={() => onPageChange(Math.max(page - 1, 1))}>Prev</button>
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" mt={2} flexWrap="wrap">
+            <Button 
+                sx={btnSx}
+                variant="outlined" 
+                onClick={() => onPageChange(Math.max(page - 1, 1))}
+                disabled={page === 1}
+            >
+                Prev
+            </Button>
 
             {pagination.map((p, idx) =>
-                p === "..." ? (
-                <span key={idx}>...</span>
+                p === '...' ? (
+                <Typography key={idx} sx={{ mx: 1 }}>...</Typography>
                 ) : (
-                <button
+                <Button
+                    sx={btnSx}
                     key={idx}
+                    variant={page === p ? "contained" : "outlined"}
                     onClick={() => onPageChange(p)}
-                    style={{ fontWeight: page === p ? "bold" : "normal" }}
                 >
                     {p}
-                </button>
+                </Button>
                 )
             )}
 
-            <button onClick={() => onPageChange(Math.min(page + 1, totalPages))}>
+            <Button 
+                sx={btnSx}
+                variant="outlined" 
+                onClick={() => onPageChange(Math.min(page + 1, totalPages))}
+                disabled={page === totalPages}
+            >
                 Next
-            </button>
-        </div>
+            </Button>
+        </Stack>
     );
 }
 
